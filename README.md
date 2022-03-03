@@ -25,13 +25,13 @@
 |-----------------|------------|--------------------------------|
 | product_name    | string     | null: false                    |
 | explanation     | text       | null: false                    |
-| seller          | text       | null: false                    |
+| price           | string     | null: false                    |
 | user            | references | null: false, foreign_key: true |
-| category        | integer    | null: false                    |
-| product_condition| integer   | null: false                    |
-| shipping_charge | integer   | null: false                    |
-| prefecture      | integer    | null: false                    |
-| days_to_ship     | integer   | null: false                    |
+| category_id     | integer    | null: false                    |
+| product_condition_id| integer| null: false                    |
+| shipping_charge_id | integer | null: false                    |
+| prefecture_id      | integer | null: false                    |
+| days_to_ship_id  | integer   | null: false                    |
 
 
 
