@@ -7,9 +7,12 @@
 | email              | string              | null: false, unique: true |
 | encrypted_password | string              | null: false               |
 | nickname           | string              | null: false               |
+| birthday           | date                | null: false               |
 | name               | string              | null: false               |
-| pseudonym          | string              | null: false               |
-| birthday           | string              | null: false               |
+| surname            | string              | null: false               |
+| name_pseudonym     | string              | null: false               |
+| surname_pseudonym  | string              | null: false               |
+
 
 ### Association
 
@@ -24,6 +27,14 @@
 | explanation     | text       | null: false                    |
 | seller          | text       | null: false                    |
 | user            | references | null: false, foreign_key: true |
+| category        | integer    | null: false                    |
+| product_condition| integer   | null: false                    |
+| shipping_charge | integer   | null: false                    |
+| prefecture      | integer    | null: false                    |
+| days_to_ship     | integer   | null: false                    |
+
+
+
 
 ### Association
 
@@ -47,7 +58,7 @@
 | Column        | Type      | Options                         |
 |-------------  |-----------|---------------------------------|
 | post_code     | string    | null: false                     |
-| prefectures_id| integer   | null: false                     |
+| prefecture_id | integer   | null: false                     |
 | municipality  | string    | null: false                     |
 | address       | string    | null: false                     |
 | building_name | string    |                                 |
@@ -57,4 +68,3 @@
 ### Association
 
 - belongs_to :purchase
-
