@@ -7,6 +7,9 @@
 | email              | string              | null: false, unique: true |
 | encrypted_password | string              | null: false               |
 | nickname           | string              | null: false               |
+| name               | string              | null: false               |
+| pseudonym          | string              | null: false               |
+| birthday           | string              | null: false               |
 
 ### Association
 
@@ -17,10 +20,10 @@
 
 | Column          | Type       | Options                        |
 |-----------------|------------|--------------------------------|
-| product_name    | text       | null: false                    |
+| product_name    | string     | null: false                    |
 | explanation     | text       | null: false                    |
 | seller          | text       | null: false                    |
-| user_id         | references | null: false, foreign_key: true |
+| user            | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -31,27 +34,27 @@
 
 | Column      | Type      | Options                         |
 |-------------|-----------|---------------------------------|
-| user_id    | references | null: false, foreign_key: true  |
-| item_id    | references | null: false, foreign_key: true  |
-
+| user        | references | null: false, foreign_key: true |
+| item        | references | null: false, foreign_key: true |
+ 
 ### Association
 
 - belongs_to :item
 - belongs_to :user
-- belongs_to :shipping_address
+- has_one :shipping_address
 ## shipping_address
 
 | Column        | Type      | Options                         |
 |-------------  |-----------|---------------------------------|
 | post_code     | string    | null: false                     |
-| prefectures   | string    | null: false                     |
+| prefectures_id| integer   | null: false                     |
 | municipality  | string    | null: false                     |
 | address       | string    | null: false                     |
-| building_name | text      | unique: true                    |
+| building_name | string    |                                 |
 | phone_number  | string    | null: false                     |
-| item_id       | references| null: false, foreign_key: true  |
+| purchase      | references| null: false, foreign_key: true  |
 
 ### Association
 
-- belongs_to :purchases
+- belongs_to :purchase
 
