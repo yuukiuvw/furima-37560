@@ -1,24 +1,57 @@
-# README
+# DB 設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users table
 
-Things you may want to cover:
+| Column             | Type                | Options                   |
+|--------------------|---------------------|---------------------------|
+| email              | string              | null: false, unique: true |
+| encrypted_password | string              | null: false               |
+| nickname           | string              | null: false               |
 
-* Ruby version
+### Association
 
-* System dependencies
+* has_many :items
+* has_many :purchases
 
-* Configuration
+## items table
 
-* Database creation
+| Column          | Type       | Options                        |
+|-----------------|------------|--------------------------------|
+| product_name    | text       | null: false                    |
+| explanation     | text       | null: false                    |
+| seller          | text       | null: false                    |
+| user_id         | references | null: false, foreign_key: true |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- belongs_to :user
+- has_one :purchase
 
-* Services (job queues, cache servers, search engines, etc.)
+## purchases table
 
-* Deployment instructions
+| Column      | Type      | Options                         |
+|-------------|-----------|---------------------------------|
+| user_id    | references | null: false, foreign_key: true  |
+| item_id    | references | null: false, foreign_key: true  |
 
-* ...
+### Association
+
+- belongs_to :item
+- belongs_to :user
+- belongs_to :shipping_address
+## shipping_address
+
+| Column        | Type      | Options                         |
+|-------------  |-----------|---------------------------------|
+| post_code     | string    | null: false                     |
+| prefectures   | string    | null: false                     |
+| municipality  | string    | null: false                     |
+| address       | string    | null: false                     |
+| building_name | text      | unique: true                    |
+| phone_number  | string    | null: false                     |
+| item_id       | references| null: false, foreign_key: true  |
+
+### Association
+
+- belongs_to :purchases
+
