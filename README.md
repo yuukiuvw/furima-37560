@@ -25,7 +25,7 @@
 |-----------------|------------|--------------------------------|
 | product_name    | string     | null: false                    |
 | explanation     | text       | null: false                    |
-| price           | string     | null: false                    |
+| price           | integer    | null: false                    |
 | user            | references | null: false, foreign_key: true |
 | category_id     | integer    | null: false                    |
 | product_condition_id| integer| null: false                    |
