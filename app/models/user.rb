@@ -9,12 +9,12 @@ class User < ApplicationRecord
          
          with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ } do
          validates :name
-         validates :surname_pseudonym
+         validates :surname
          end
          
          with_options presence: true, format: { with: /\A[ァ-ヶー-]+\z/ } do
-         validates :name_pseudonym, presence: true
-         validates :surname_pseudonym, presence: true
+         validates :name_pseudonym
+         validates :surname_pseudonym
          end
 
          VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
