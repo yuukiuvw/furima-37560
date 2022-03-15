@@ -1,6 +1,6 @@
 class ShippingAddressesController < ApplicationController
   before_action :authenticate_user!, expect: [:create]
-  before_action :contributor_confirmation, only: [:index]
+  before_action :contributor_confirmation, only: [:index,:create]
 
   def index
     @shipping_address_purchase = ShippingAddressPurchase.new
@@ -36,8 +36,8 @@ end
 
  def contributor_confirmation
   @item = Item.find(params[:item_id])
-  if current_user == @item.user
+  if current_user == @item.user || @item.purchase.present?
   redirect_to root_path  
-end
+  end
 end
 end
