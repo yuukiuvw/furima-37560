@@ -1,14 +1,13 @@
 class ShippingAddressesController < ApplicationController
   before_action :authenticate_user!, expect: [:create]
   before_action :contributor_confirmation, only: [:index,:create]
+  before_action :set_item, only: [:index,:create]
 
   def index
     @shipping_address_purchase = ShippingAddressPurchase.new
-    @item = Item.find(params[:item_id])
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @shipping_address_purchase = ShippingAddressPurchase.new(shipping_address_params)
     if @shipping_address_purchase.valid?
       pay_item
@@ -26,7 +25,7 @@ class ShippingAddressesController < ApplicationController
  end
 
  def pay_item
-  Payjp.api_key = "sk_test_64780fbc7b5dbb96055e2cb6"  
+  Payjp.api_key = "ENV["PAYJP_SECRET_KEY""  
       Payjp::Charge.create(
         amount: @item.price,  
         card: shipping_address_params[:token],    
@@ -39,5 +38,10 @@ end
   if current_user == @item.user || @item.purchase.present?
   redirect_to root_path  
   end
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
 end
 end

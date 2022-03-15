@@ -19,4 +19,9 @@ class User < ApplicationRecord
 
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
   validates :password, length: { minimum: 6 }, format: { with: VALID_PASSWORD_REGEX }
+
+
+  has_many :purchases
+
+
 end

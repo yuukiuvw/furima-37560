@@ -58,5 +58,41 @@ it "電話番号が空では登録できないこと" do
   expect(@shipping_address_purchase.errors.full_messages).to include("Phone number can't be blank")
 end
 
+it "番地が空では購入できない" do
+  @shipping_address_purchase.address = ""
+  @shipping_address_purchase.valid?
+  expect(@shipping_address_purchase.errors.full_messages).to include("Address can't be blank")
+end
+
+it "電話番号が9桁以下では購入できない" do
+  @shipping_address_purchase.phone_number = "0901234"
+  @shipping_address_purchase.valid?
+  expect(@shipping_address_purchase.errors.full_messages).to include("Phone number is invalid")
+end
+
+it "電話番号が12桁以上では購入できない" do
+  @shipping_address_purchase.phone_number = "0901234"
+  @shipping_address_purchase.valid?
+  expect(@shipping_address_purchase.errors.full_messages).to include("Phone number is invalid")
+end
+
+it "電話番号に半角数字以外が含まれている場合は購入できない" do
+   @shipping_address_purchase.phone_number = "0901234あ"
+   @shipping_address_purchase.valid?
+   expect(@shipping_address_purchase.errors.full_messages).to include("Phone number is invalid")
+ end
+
+ it "userが紐付いていなければ購入できない" do
+  @shipping_address_purchase.user_id = nil
+   @shipping_address_purchase.valid?
+   expect(@shipping_address_purchase.errors.full_messages).to include("User can't be blank")
+ end
+   
+ it "itemが紐付いていなければ購入できない" do
+   @shipping_address_purchase.item_id = nil
+   @shipping_address_purchase.valid?
+   expect(@shipping_address_purchase.errors.full_messages).to include("Item can't be blank")
+  end
+
 end
 end
